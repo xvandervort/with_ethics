@@ -33,7 +33,7 @@ module WithEthics
       pr = Promises.new
       expect(pr.config).to be_kind_of Hash
       expect(pr.config.keys).to include("promised_files")
-      expect(pr.config.keys).to include("tests")
+      expect(pr.config.keys).to include("checks")
       # I can't think of anything else yet.
     end
     
@@ -41,21 +41,21 @@ module WithEthics
       pr = Promises.new
     
       # tests is an array of test names
-      expect(pr.config["tests"]).to include("promised_files")
+      expect(pr.config["checks"]).to include("promised_files")
     end
     
     it "should list security_tests test by default" do
       pr = Promises.new
     
       # tests is an array of test names
-      expect(pr.config["tests"]).to include("security_tests")
+      expect(pr.config["checks"]).to include("security_checks")
     end
     
     it "should list version control test by default" do
       pr = Promises.new
     
       # tests is an array of test names
-      expect(pr.config["tests"]).to include("version_control")
+      expect(pr.config["checks"]).to include("version_control")
     end
     
     # Will not yet configure basic files to check.
@@ -65,7 +65,7 @@ module WithEthics
     
     it "should return a list of file tests" do
       pr = Promises.new @config
-      l = pr.get_tests("promised_files")
+      l = pr.get_checks("promised_files")
       expect(l).to be_kind_of(Array)
       expect(l.size).to eq(@config["promised_files"].keys.size)
       

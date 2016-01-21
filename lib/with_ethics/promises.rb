@@ -11,11 +11,11 @@ module WithEthics
       @config = args
       
       # sanity checking and adding in defaults
-      check_tests
+      checks
       check_files
     end
     
-    def get_tests(which)
+    def get_checks(which)
       # assume which is a single test type
       # TODO: sanity check incoming
       @config[which].keys.collect{|x| @config[which][x]}
@@ -36,11 +36,11 @@ module WithEthics
     
     # ensures there are tests configured and
     # adds defaults unless explicitly excluded
-    def check_tests
-      @config["tests"] = [] unless @config.has_key?("tests")
-      @config["tests"] << "promised_files" unless @config["tests"].include?("promised_files")
-      @config["tests"] << "security_tests" unless @config["tests"].include?("security_tests")
-      @config["tests"] << "version_control" unless @config["tests"].include?("version_control")
+    def checks
+      @config["checks"] = [] unless @config.has_key?("checks")
+      @config["checks"] << "promised_files" unless @config["checks"].include?("promised_files")
+      @config["checks"] << "security_checks" unless @config["checks"].include?("security_checks")
+      @config["checks"] << "version_control" unless @config["checks"].include?("version_control")
     end
   end
 end
