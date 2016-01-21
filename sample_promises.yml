@@ -1,0 +1,14 @@
+code_of_conduct:
+    filename: CODE_OF_CONDUCT.md
+    path: root
+    
+privacy_policy:
+    filename: privacy.doc
+    path: root/public
+    
+deployment_script:
+    filename: deploy.rb
+    path: root
+    
+
+    
