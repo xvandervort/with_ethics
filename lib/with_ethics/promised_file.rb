@@ -35,6 +35,11 @@ module WithEthics
       end
     end
     
+    def can_be_used?
+      file_stats if @stats.empty?
+      !!(@stats[:size] > 0 && @stats[:is_file] == true && @stats[:readable] == true)
+    end
+    
     private
     
     def fix_root(pth)

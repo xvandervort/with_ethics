@@ -48,6 +48,10 @@ module WithEthics
       expect(@pf.stats[:is_directory]).to eq(false)
     end
     
+    it "should say if file is useable" do
+      expect(@pf.can_be_used?).to be(true)
+    end
+    
     it "should check file is under version control"
     it "should search below given path for missing file"
   end

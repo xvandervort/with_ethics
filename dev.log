@@ -1,7 +1,10 @@
+1/22
+    Wiring up to do simple file checks. 
+
 1/21
     System needs a controller and a subcontroller that knows what has been promised and can configure tests to be run. That should be fun.
     I now have a "controller" that takes in the results of a yaml file, does some incredibly simple-minded sanity checking, and nothign else.
-    NEXT: It should run some tests!
+    NEXT: It should run some tests! (created controller, accepts promises object. Now RUN THEM ALL)
 
 1/19
     Check for keeping of promises and following basic practices.
