@@ -34,11 +34,29 @@ module WithEthics
     end
     
     def security_checks
+      # do security test files exist?
+      #   This is more complicated to check than files because it requires wildcards
+      # is there a static analysis tool available?
+      # What does the static analysis tool say?
+      # how about permissions? Are they okay?
+      # Are there ##security tags in the code?
       true
     end
     
     def version_control
+      # Is the code checked in to github or subversion or mercurial? (screw any others)
+      
       true
+    end
+    
+    # untested
+    def documentation
+      # is there a readme file? # that's actually a file promise
+      # is there a doc directory?
+      # is the code well commented? ...
+      # Are there TODOs in the code?
+      # Are there a lot of # FIX 's in the code?
+      false
     end
   end
 end
