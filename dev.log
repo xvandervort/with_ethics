@@ -1,5 +1,11 @@
+1/25
+  Finishing up first pass at reporter (console output only).
+  Now: Insert reporter into checking and then actually run a check from the command line!
+
 1/22
-    Wiring up to do simple file checks. 
+    Wiring up to do simple file checks. (mostly done but not from command line yet)
+    Adding a reporter so I can do some logging. At first, just to the console
+    NEXT: Finish wiring things up so you can check for promised files and get back output.
 
 1/21
     System needs a controller and a subcontroller that knows what has been promised and can configure tests to be run. That should be fun.

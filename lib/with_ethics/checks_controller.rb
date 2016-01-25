@@ -7,16 +7,23 @@ module WithEthics
   # actually configures and runs tests as required.
   # This is where the action happens.
   class ChecksController
-    attr_reader :checks_run
-    def initialize(pr)
+    attr_reader :checks_run, :reporter
+    
+    # In: a promises object and a reporter
+    # If no reporter given, then output straight to console is an adequate default.
+    def initialize(pr, reporter = Reporter.new)
       # The checks controller will run those things in the config
       # under checks.
       @promised = pr.config
       @checks_run = {}
+      @reporter = reporter
     end
     
     def run_checks
       @promised["checks"].each do |check|
+        # remember the checks now being run
+        @reporter.family = check
+        
         @checks_run[check] =  self.send check.to_sym  # record completion status
       end
     end
@@ -26,10 +33,13 @@ module WithEthics
         pr = PromisedFile.new filename: @promised["promised_files"][k]["filename"],
                               path: @promised["promised_files"][k]["path"]
         
+        result = pr.can_be_used?
         # log output!
-        pr.can_be_used?
+        @reporter.report  @promised["promised_files"][k]["filename"], result
+        result
       end
       
+      # TODO: replace with a begin/rescue block that returns false if rescued, true otherwise
       true  
     end
     

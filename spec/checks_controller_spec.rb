@@ -41,5 +41,16 @@ module WithEthics
       expect(@cc.promised_files).to be(true)
     end
     
+    # The controller needs to be configured with command line info
+    # so best to pass it in after creation rather than try to initialize it internally
+    it "should accept a controller on init" do
+      expect(@cc.reporter).to be_kind_of(Reporter)
+    end
+    
+    it "should report one check" do
+      @cc.run_checks
+      expect(@cc.reporter.progress.keys).to include(@config["checks"].first)
+      expect(@cc.reporter.progress[@config["checks"].first].first.message).to match(/CODE_OF_CONDUCT.md/)
+    end
   end
 end
