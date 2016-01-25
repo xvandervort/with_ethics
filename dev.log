@@ -1,6 +1,11 @@
 1/25
   Finishing up first pass at reporter (console output only).
-  Now: Insert reporter into checking and then actually run a check from the command line!
+  Insert reporter into checking and then actually run a check from the command line! (DONE)
+  Now: Check for tests tagged ## SECURITY (which may or may not actually run)
+        Maybe also check the code for TODO and BUG markers.
+        These are all documentation tests.
+    What it should do here is NOT report whether a particular file has the tag or not but, instead, a count (and optional list) of files with the tag OR failure to find any. NOTE: at file read time looks like the wrong place to fix a path, because there are too many levels and permutations of data in the config. Instead, I'm going to just make some utilities.
+    Having trouble with the mocking. I'm goingt o have to start making real test files. Boo!
 
 1/22
     Wiring up to do simple file checks. (mostly done but not from command line yet)

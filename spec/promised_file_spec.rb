@@ -8,7 +8,7 @@ module WithEthics
       # Though theoretically, it would be cleaner to avoid these interactions
       # with the file system.
       @filename = 'CODE_OF_CONDUCT.md'
-      @path = 'root'
+      @path = '@root'
       @pf = PromisedFile.new filename: @filename, path: @path
     end
     
@@ -41,13 +41,13 @@ module WithEthics
       allow(File).to receive(:exist?).and_return(false)
       expect(@pf.check_for_file).to eq(false)
     end
-    
+
     it "should know file is a file and not a dirctory" do
       @pf.file_stats
       expect(@pf.stats[:is_file]).to eq(true)
       expect(@pf.stats[:is_directory]).to eq(false)
     end
-    
+
     it "should say if file is useable" do
       expect(@pf.can_be_used?).to be(true)
     end
