@@ -30,6 +30,7 @@ module WithEthics
     
     def promised_files
       @promised["promised_files"].each_key do |k|
+        
         pr = PromisedFile.new filename: @promised["promised_files"][k]["filename"],
                               path: @promised["promised_files"][k]["path"]
         

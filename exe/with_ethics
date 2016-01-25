@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
-require "with_ethics"
 require 'optparse'
+require "with_ethics"
+include WithEthics
 
 params = {}  # for parameters to pass on to run unit
 option_parser = OptionParser.new do |opts|
@@ -11,15 +12,13 @@ option_parser = OptionParser.new do |opts|
   end
   
   # use for testing.
-  opts.on('-s', '--SKIP', "Simulate running but don't actually do anything") do 
+  opts.on('-s', '--SKIP', "Simulate running but don't actually do anything") do # not yet implemented
     params[:skip] = true
   end
 end
 
 option_parser.parse!
 
-params[:skip] = false if !params.has_key?(:skip)
-
-# Let us assume that, in the beginning, all tests were run and the promises file
-# is in the current directory.
-  
+params[:skip] ||= false
+params[:config_file] ||= "promises.yml"
+execute!(params)

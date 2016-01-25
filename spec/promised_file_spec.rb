@@ -52,6 +52,11 @@ module WithEthics
       expect(@pf.can_be_used?).to be(true)
     end
     
+    it "should return false for non existent files" do
+      pf = PromisedFile.new filename: "iDoNotExist.txt", path: @path
+      expect(pf.can_be_used?).to be(false)
+    end
+    
     it "should check file is under version control"
     it "should search below given path for missing file"
   end

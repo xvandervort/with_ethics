@@ -6,7 +6,11 @@ require 'with_ethics/checks_controller'
 require 'with_ethics/reporter'
 
 module WithEthics
-  # Your code goes here...
   
-  # read in the configuration here so that it will be available to whoever needs it
+  def execute!(parms)
+    @config = YamlReader.new( parms[:config_file] ).data
+    @pr = Promises.new @config
+    controller = ChecksController.new @pr
+    controller.run_checks
+  end
 end

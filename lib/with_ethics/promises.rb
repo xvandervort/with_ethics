@@ -10,6 +10,7 @@ module WithEthics
     def initialize(args = {})
       @config = args
       
+      
       # sanity checking and adding in defaults
       checks
       check_files
@@ -27,7 +28,7 @@ module WithEthics
     # ensures there is a files key in config
     # and stocks it with defaults if they are not present
     def check_files
-      @config["promised_files"] = {} unless @config.has_key?("promised_files")  
+      @config["promised_files"] ||= {} 
       # do not yet have any defaults
       # but if there were some, here you would ensure they were included
       # unless explicitly removed

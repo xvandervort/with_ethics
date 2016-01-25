@@ -1,16 +1,17 @@
-code_of_conduct:
+promised_files: 
+  code_of_conduct:
     filename: CODE_OF_CONDUCT.md
     path: root
-    
-privacy_policy:
+      
+  privacy_policy:
     filename: privacy.doc
     path: root/public
-    
-deployment_script:
+      
+  deployment_script:
     filename: deploy.rb
     path: root
-    
-readme:
+      
+  readme:
     filename: README.md
     path: root
 
