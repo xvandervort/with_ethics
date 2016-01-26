@@ -70,5 +70,24 @@ module WithEthics
         expect(s[:is_file]).to eq(true) 
       end
     end
+    
+    describe "with wildcards" do
+      it "should fill paths when given a filename with a wildcard" do
+        ff = FileInfo.new name: "*.md"
+        expect(ff.paths).to be_kind_of(Array)
+        expect(ff.paths).to_not be_empty
+        expect(ff.paths).to include("#{ Dir.pwd }/README.md")
+      end
+      
+      it "should iterate through paths" do
+        ff = FileInfo.new name: "*.md"  # normally there will be 2
+        expect{
+          ff.each_path do |pth|
+            expect(pth).to be_kind_of FileInfo
+            expect(pth.can_be_used?).to eq(true)
+          end
+        }.not_to raise_error
+      end
+    end
   end
 end

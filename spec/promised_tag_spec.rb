@@ -2,11 +2,12 @@ require 'spec_helper'
 
 module WithEthics
   describe PromisedTag do
+    
     describe "init" do
       it "should accept tag to search for" do
         tag = 'security'
         pt = PromisedTag.new tag: tag, name: 'x'
-        expect(pt.tag_list).to eq([tag])
+        expect(pt.tag).to eq(tag)
       end
       
       it "should accept path tag" do
@@ -48,11 +49,30 @@ module WithEthics
     end
 
     describe "tag search" do
+      before do
+        @rep = Reporter.new output_to: []
+      end
+      
       it "should find tag in one file" do                                   
         # end setup I hope
-        pt = PromisedTag.new tag: 'security', name: 'somecode.rb', path: "@root/spec/files"
+        pt = PromisedTag.new tag: 'security', name: 'somecode.rb', path: "@root/spec/files", reporter: @rep
         pt.search
         expect(pt.found).to eq(1)
+      end
+      
+      it "should find tag in files using wildcard name" do
+        pt = PromisedTag.new tag: 'security', name: '*.rb', path: "@root/spec/files", reporter: @rep
+        pt.search
+        expect(pt.found).to eq(1)
+      end
+      
+      it "should report how many tags found" do
+        # this is a naive report since the tag could be found
+        # a hundred times in one file and not at all in another.
+        @rep.family = "tags"
+        pt = PromisedTag.new tag: 'security', name: '*.rb', path: "@root/spec/files", reporter: @rep
+        pt.search
+        expect(pt.reporter.progress["tags"].first.message).to eq("\e[0;32;49m\tFound 'security' tag 1 time(s)\e[0m")
       end
     end
   end

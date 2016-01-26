@@ -1,27 +1,30 @@
 promised_files: 
   code_of_conduct:
     filename: CODE_OF_CONDUCT.md
-    path: root
+    path: "@root"
       
   privacy_policy:
     filename: privacy.doc
-    path: @root/public
+    path: "@root/public"
       
   deployment_script:
     filename: deploy.rb
-    path: @root
+    path: "@root"
       
   readme:
     filename: README.md
-    path: @root
+    path: "@root"
     
-promised_docs:
+promised_tags:
   # NOTE that a security tag can go in a test file or a code file.
   # it means something different in each location
-  security_tag:
-    filename: *.rb
-    path: @root/spec/files
+  security:
+    filename: "*.rb"
+    path: "@root/spec/files"
     recurse: true
         
-
+  todo:
+    filename: "*.rb"
+    path: "@root/lib/with_ethics"
+    recurse: false 
     

@@ -12,13 +12,13 @@ module WithEthics
             "path" => "root"
           }
         },
-        
+          
         "checks" => ['promised_files']
         
-      }
-      
+        }
+      @reporter = Reporter.new output_to: []
       @pr = Promises.new @config
-      @cc = ChecksController.new @pr
+      @cc = ChecksController.new @pr, @reporter
     end
     
     it "initializes with yml output hash" do
@@ -30,11 +30,26 @@ module WithEthics
     # or a feature to suppress output
     it "runs checks" do
       @cc.run_checks
-      expect(@cc.checks_run.keys).to include("promised_files")
       
       # note that the following checks were added because they are defaults
       expect(@cc.checks_run.keys).to include("security_checks")
       expect(@cc.checks_run.keys).to include("version_control")
+    end
+    
+    it "actually runs tag checks" do
+      config = @config.merge "promised_tags" => {
+            "security" => {
+              "filename" => "*.rb",
+              "path" => "@root/spec/files"
+            }
+          }
+        
+      pr = Promises.new config
+      cc2 = ChecksController.new pr, Reporter.new(output_to: [])
+      cc2.run_checks
+      expect(cc2.checks_run.keys).to include("promised_files")
+
+      expect(cc2.promised_tags).to be(true)
     end
     
     it "actually runs file checks" do

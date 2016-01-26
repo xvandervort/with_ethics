@@ -40,7 +40,7 @@ module WithEthics
     
     # for printing when the "finalize" or "output summary" method is called
     it "should keep summary of results" do
-      r = Reporter.new
+      r = Reporter.new output_to: []
       pf = "promised_files"
       r.family = pf
       f = "CODE_OF_CONDUCT.md"

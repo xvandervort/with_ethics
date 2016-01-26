@@ -25,6 +25,13 @@ module WithEthics
             "filename" => "README.md",
             "path" => "root"
           }
+        },
+        
+        "promised_tags" => {
+          "security" => {
+            "filename" => "*.rb",
+            "path" => "@root/spec/files"
+          }
         }
       }
     end
@@ -56,6 +63,11 @@ module WithEthics
     
       # tests is an array of test names
       expect(pr.config["checks"]).to include("version_control")
+    end
+    
+    it "should list promised tags check when told" do
+      pr = Promises.new @config
+      expect(pr.config["checks"]).to include("promised_tags")
     end
     
     # Will not yet configure basic files to check.

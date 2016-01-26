@@ -10,7 +10,6 @@ module WithEthics
     def initialize(args = {})
       @config = args
       
-      
       # sanity checking and adding in defaults
       checks
       check_files
@@ -42,6 +41,11 @@ module WithEthics
       @config["checks"] << "promised_files" unless @config["checks"].include?("promised_files")
       @config["checks"] << "security_checks" unless @config["checks"].include?("security_checks")
       @config["checks"] << "version_control" unless @config["checks"].include?("version_control")
+      
+      # and non default ones
+      %w(promised_tags).each do |key|
+        @config["checks"] << key if @config.has_key?(key)
+      end
     end
   end
 end

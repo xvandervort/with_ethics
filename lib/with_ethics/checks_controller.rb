@@ -44,6 +44,20 @@ module WithEthics
       true  
     end
     
+    def promised_tags
+      @promised["promised_tags"].each_key do |k|
+        
+        pr = PromisedTag.new  tag: k,
+                              name: @promised["promised_tags"][k]["filename"],
+                              path: @promised["promised_tags"][k]["path"],
+                              reporter: @reporter
+        pr.search
+        
+      end
+      
+      true
+    end
+    
     def security_checks
       # do security test files exist?
       #   This is more complicated to check than files because it requires wildcards
