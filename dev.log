@@ -2,7 +2,8 @@
     tag search. It has run into a problem with wildcards in file names. ... Okay. FileInfo has been extended to iterate through a list with filenames.
     NOW: Reporting results of tag search. It will report the files it's found in. (done)
     NOTE: controller tests are printing stuff out through reporter. SUPPRESS! (done)
-    AS soon as the current stuff is working, start finding UNIT TESTS
+    AS soon as the current stuff is working, start finding UNIT TESTS (working on it)
+    Ok. I started to configure this to work with file info objects but that doesn't work because it hasn't found out the names yet! What it actually needs is a place to start (starting at root) and a couple things to look for. I'll just go with defaults. So really, it doesn't need anything.
 
 1/25
   Finishing up first pass at reporter (console output only).

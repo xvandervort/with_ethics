@@ -6,7 +6,7 @@ require 'with_ethics/checks_controller'
 require 'with_ethics/reporter'
 require 'with_ethics/promised_tag'
 require 'with_ethics/file_info'
-
+require 'with_ethics/tcheck'
 
 module WithEthics
   
