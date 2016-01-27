@@ -1,3 +1,10 @@
+1/27
+    Worked today on finding test folder and files. Works (recursively, even)
+    Needs to be more discriminating about naming of the files it returns.
+    Needs to be wired up to work form the command line.
+    WAIT! renamed tcheck to tfind. Took out all the reporting stuff. Then created something called tcheck. THAT will get the output from tfind and do all the checks and reporting.
+    THEN wire it up.
+    
 1/26
     tag search. It has run into a problem with wildcards in file names. ... Okay. FileInfo has been extended to iterate through a list with filenames.
     NOW: Reporting results of tag search. It will report the files it's found in. (done)
