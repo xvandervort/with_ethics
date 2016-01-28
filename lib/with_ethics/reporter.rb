@@ -47,6 +47,13 @@ module WithEthics
       store(out_string, status)
     end
     
+    # TODO: REFACTOR
+    def report_problem(message) # assumed to be false
+      out_string = "\t\tFound a problem with #{ message }!".colorize(:red)
+      output_to_path(out_string)
+      store(out_string, false)
+    end
+    
     # actually handles the output of generated strings
     def output_to_path(str)
       if @output_to.include?('console')

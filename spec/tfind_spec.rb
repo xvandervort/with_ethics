@@ -17,24 +17,23 @@ module WithEthics
     
     describe "search" do
       before do
-        @t = Tfind.new 
+        @t = Tfind.new
+        @cur = Dir.pwd
       end
       
       it "should find easy test folder" do
-        cur = Dir.pwd
-        allow(Dir).to receive(:glob).with("#{ cur }/**/test").and_return("#{ cur }/test")
+        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return("#{ @cur }/test")
         allow(Dir).to receive(:entries).and_return(['.', '..', "some_test.rb"])
 
-        pref = "#{ cur }/test"
+        pref = "#{ @cur }/test"
         expect(@t.search).to eq([pref, ["#{ pref }/some_test.rb"]] )
       end
       
       it "should find lower level test folder" do
-        cur = Dir.pwd
-        allow(Dir).to receive(:glob).with("#{ cur }/**/test").and_return("#{ cur }/one/test")
+        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return("#{ @cur }/one/test")
         allow(Dir).to receive(:entries).and_return(['.', '..', "some_test.rb"])
 
-        pref = "#{ cur }/one/test"
+        pref = "#{ @cur }/one/test"
         expect(@t.search).to eq([pref, ["#{ pref }/some_test.rb"]] )
       end
     end

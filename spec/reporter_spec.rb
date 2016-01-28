@@ -49,5 +49,11 @@ module WithEthics
       expect(r.progress[pf].first.message).to eq("\e[0;32;49m\tFound CODE_OF_CONDUCT.md\e[0m")
       expect(r.progress[pf].first.status).to eq(true)
     end
+    
+    it "should report problems" do
+      r = Reporter.new
+      
+      expect{ r.report_problem("some file")}.to output("\e[0;31;49m\t\tFound a problem with some file!\e[0m\n").to_stdout
+    end
   end
 end
