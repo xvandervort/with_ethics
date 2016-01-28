@@ -22,15 +22,15 @@ module WithEthics
       end
       
       it "should find easy test folder" do
-        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return("#{ @cur }/test")
+        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return(["#{ @cur }/test"])
         allow(Dir).to receive(:entries).and_return(['.', '..', "some_test.rb"])
 
         pref = "#{ @cur }/test"
         expect(@t.search).to eq([pref, ["#{ pref }/some_test.rb"]] )
       end
       
-      it "should find lower level test folder" do
-        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return("#{ @cur }/one/test")
+      it "should find lower level test folder" do 
+        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return(["#{ @cur }/one/test"])
         allow(Dir).to receive(:entries).and_return(['.', '..', "some_test.rb"])
 
         pref = "#{ @cur }/one/test"

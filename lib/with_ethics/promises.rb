@@ -43,7 +43,7 @@ module WithEthics
       @config["checks"] << "version_control" unless @config["checks"].include?("version_control")
       
       # and non default ones
-      %w(promised_tags).each do |key|
+      %w(promised_tags tests).each do |key|
         @config["checks"] << key if @config.has_key?(key)
       end
     end

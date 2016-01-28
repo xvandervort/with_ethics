@@ -68,6 +68,11 @@ module WithEthics
       true
     end
     
+    def tests
+      t = Tcheck.new reporter: @reporter
+      t.search
+    end
+    
     def version_control
       # Is the code checked in to github or subversion or mercurial? (screw any others)
       

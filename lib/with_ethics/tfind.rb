@@ -24,13 +24,16 @@ module WithEthics
       found = nil
       # look for anything matching the names in the paths variable
       @paths.each do |path|
-        found = Dir.glob("#{ target }/**/#{ path }")
-        break if found
+        results = Dir.glob("#{ target }/**/#{ path }")
+        
+        # There can be only one!
+        found = results.first unless results.empty?
+        
+        break unless found.nil?
       end
-      
-      
+
       # NOW I NEED TO FORMAT THE RESULTS
-      out_list  = if found.nil?
+      out_list  = if found.nil? 
         # record no such animal
         
         []

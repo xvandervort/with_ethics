@@ -32,6 +32,10 @@ module WithEthics
             "filename" => "*.rb",
             "path" => "@root/spec/files"
           }
+        },
+        
+        "tests" => {
+          "type" => "ruby"
         }
       }
     end
@@ -68,6 +72,11 @@ module WithEthics
     it "should list promised tags check when told" do
       pr = Promises.new @config
       expect(pr.config["checks"]).to include("promised_tags")
+    end
+    
+    it "should look for tests" do
+      pr = Promises.new @config
+      expect(pr.config["checks"]).to include("tests")
     end
     
     # Will not yet configure basic files to check.

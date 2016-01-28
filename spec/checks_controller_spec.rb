@@ -52,6 +52,19 @@ module WithEthics
       expect(cc2.promised_tags).to be(true)
     end
     
+    it "actually runs test check" do
+      cur = Dir.pwd
+      allow(Dir).to receive(:glob).with("#{ cur }/**/test").and_return(["#{ cur }/test"])
+      allow(Dir).to receive(:entries).and_return(['.', '..', "some_test.rb"])
+      config = @config.merge "tests" => {
+            "type" => "ruby"
+          }
+      pr = Promises.new config
+      cc2 = ChecksController.new pr, Reporter.new(output_to: [])
+      cc2.run_checks
+      expect(cc2.checks_run.keys).to include("tests")      
+    end
+    
     it "actually runs file checks" do
       expect(@cc.promised_files).to be(true)
     end

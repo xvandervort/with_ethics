@@ -21,7 +21,7 @@ module WithEthics
       end
       
       it "should find the obvious" do
-        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return("#{ @cur }/test")
+        allow(Dir).to receive(:glob).with("#{ @cur }/**/test").and_return(["#{ @cur }/test"])
         allow(Dir).to receive(:entries).and_return(['.', '..', "some_test.rb"])
   
         pref = "#{ @cur }/test"
@@ -32,7 +32,7 @@ module WithEthics
       end
       
       it "should report not finding" do
-        allow(Dir).to receive(:glob).and_return(nil, nil)
+        allow(Dir).to receive(:glob).and_return([], [])
   
         # Note that the output actually comes from the reporter
         expect{ @t.search }.to output( "\e[0;31;49m\tWhere is the test directory?\e[0m\n" ).to_stdout        
