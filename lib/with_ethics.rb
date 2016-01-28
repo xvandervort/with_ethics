@@ -1,13 +1,13 @@
-require "with_ethics/version"
-require "with_ethics/yaml_reader"
-require "with_ethics/promised_file"
-require "with_ethics/promises"
-require 'with_ethics/checks_controller'
-require 'with_ethics/reporter'
-require 'with_ethics/promised_tag'
-require 'with_ethics/file_info'
-require 'with_ethics/tfind'
-require 'with_ethics/tcheck'
+require_relative "with_ethics/version"
+require_relative "with_ethics/yaml_reader"
+require_relative "with_ethics/promised_file"
+require_relative "with_ethics/promises"
+require_relative 'with_ethics/checks_controller'
+require_relative 'with_ethics/reporter'
+require_relative 'with_ethics/promised_tag'
+require_relative 'with_ethics/file_info'
+require_relative 'with_ethics/tfind'
+require_relative 'with_ethics/tcheck'
 
 module WithEthics
   

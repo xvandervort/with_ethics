@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require "with_ethics"
+require_relative "../lib/with_ethics"
 include WithEthics
 
 params = {}  # for parameters to pass on to run unit
@@ -10,10 +10,9 @@ option_parser = OptionParser.new do |opts|
     puts opts
     exit
   end
-  
-  # use for testing.
-  opts.on('-s', '--SKIP', "Simulate running but don't actually do anything") do # not yet implemented
-    params[:skip] = true
+    
+  opts.on('-f', '--file <path/to/config/file>', String, "specify config to use. Default = ./promises.yml") do |f|
+    params[:config_file] = f
   end
 end
 

@@ -1,3 +1,7 @@
+1/28
+    Finishing touches before the preso. Also started an official backlog on market (port 3001). Uh oh! Why won't the gem run from any other project but itself? (FIXED)
+    NEXT: test files check working quite badly on a rails project. Do that refactoring!
+
 1/27
     Worked today on finding test folder and files. Works (recursively, even)
     Needs to be more discriminating about naming of the files it returns.
