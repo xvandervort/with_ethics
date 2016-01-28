@@ -29,7 +29,9 @@ module WithEthics
             @reporter.report "test file #{ fil }; seems okay", true
             
           else
-            @reporter.report_problem "test file #{ fil }"
+            if f.stats[:is_directory?] == false
+              @reporter.report_problem("test file #{ fil }") 
+            end
           end
         end
       end
