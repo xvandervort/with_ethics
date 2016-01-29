@@ -1,4 +1,4 @@
-require_relative 'promised_file'
+require_relative 'file_system'
 
 module WithEthics
   # while this is called a controller, it is called that because of its function.
@@ -7,16 +7,17 @@ module WithEthics
   # actually configures and runs tests as required.
   # This is where the action happens.
   class ChecksController
-    attr_reader :checks_run, :reporter
+    attr_reader :checks_run, :reporter, :root
     
     # In: a promises object and a reporter
     # If no reporter given, then output straight to console is an adequate default.
-    def initialize(pr, reporter = Reporter.new)
+    def initialize(pr, reporter: Reporter.new, root: Dir.pwd)
       # The checks controller will run those things in the config
       # under checks.
       @promised = pr.config
       @checks_run = {}
       @reporter = reporter
+      @root = root
     end
     
     def run_checks
@@ -29,14 +30,27 @@ module WithEthics
     end
     
     def promised_files
+      @sys = FileSystem.new root: @root, reporter: @reporter
       @promised["promised_files"].each_key do |k|
+        found = if @promised['promised_files'][k].nil?
+          # means we are looking for a default type.
+          @sys.find k
+          
+        elsif @promised['promised_files'][k].has_key?("filename")
+          # This is an explicitly designated file and may or may not have a path
+          ["#{ @promised["promised_files"][k]["path"] }/#{ @promised["promised_files"][k]["filename"] }"]
         
-        pr = PromisedFile.new filename: @promised["promised_files"][k]["filename"],
-                              path: @promised["promised_files"][k]["path"]
+        else
+          #  Test looking for a custom type!
+        end
         
-        result = pr.can_be_used?
-        # log output!
-        @reporter.report  @promised["promised_files"][k]["filename"], result
+        result = false
+        # TODO: report results (useable or not) for every answer
+        found.each do |ex|
+          pr = PromisedFile.new filename: File.basename(ex), path: File.path(ex)
+          result = pr.can_be_used?
+        end
+
         result
       end
       
@@ -69,8 +83,7 @@ module WithEthics
     end
     
     def tests
-      t = Tcheck.new reporter: @reporter
-      t.search
+      
     end
     
     def version_control

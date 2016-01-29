@@ -2,7 +2,7 @@ require_relative 'file_info'
 
 # This class, given a file name and specs
 # finds it and reports whether it exists, has non zero length,
-# and how knows what other wonderful things?
+# and who knows what other wonderful things?
 module WithEthics
   class PromisedFile
     attr_reader :filename, :path, :stats

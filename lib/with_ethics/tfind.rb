@@ -1,4 +1,6 @@
 module WithEthics
+  # THIS CLASS IS NOW OBSOLETE
+  
   # class looks for test folders and pulls a list of files
   # to be evaluated for quality/value/appropriateness.
   # Currently it just searches default ruby types.

@@ -1,6 +1,16 @@
+2/2
+    Default types worked fine, so it has now been t=hrown away. Instead we have type finder (which does not actually find anything) which accepts a regex pattern for things it does not recognize.
+    Now promised_file needs to be superceded as well, by something that knows the difference between default types, custom types, and explicitly named files.
+    Looks like I have broken the Reporter "progress" method by sending it in to all sorts of other objects. Bad planning, that. Pass by reference would be nice about now ...
+    
+2/1
+    Time to build a new approach to finding files. one that allows different locations and different naming conventions. How to work that out? It needs to have some hard-coded stuff as well as the ability to make custom definitions. Really need are a set of regexes for each type. That's a start.
+    Hmmm. Having the built in types gives an opportunity to infer information. For example, if you find a privacy policy VIEW file, you know you have a web app. If you find a deploy.rb you know you have capistrano. Etc. Etc. There should be some kind of database of information or inferences. These also include inferences on the extension (.rb vs .md vs .js vs .txt etc)
+
 1/28
     Finishing touches before the preso. Also started an official backlog on market (port 3001). Uh oh! Why won't the gem run from any other project but itself? (FIXED)
     NEXT: test files check working quite badly on a rails project. Do that refactoring!
+    NOTE: The preso went moderately well. If I'm still working here at the end of the year, I had better have much more to show!
 
 1/27
     Worked today on finding test folder and files. Works (recursively, even)

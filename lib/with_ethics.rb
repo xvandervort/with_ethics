@@ -7,7 +7,8 @@ require_relative 'with_ethics/reporter'
 require_relative 'with_ethics/promised_tag'
 require_relative 'with_ethics/file_info'
 require_relative 'with_ethics/tfind'
-require_relative 'with_ethics/tcheck'
+require_relative 'with_ethics/type_finder'
+require_relative 'with_ethics/file_system'
 
 module WithEthics
   
