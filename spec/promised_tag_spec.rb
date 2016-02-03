@@ -31,7 +31,7 @@ module WithEthics
       end
       
       it "should accept a reporter" do
-        pt = PromisedTag.new tag: "tag", reporter: Reporter.new, name: 'x'
+        pt = PromisedTag.new tag: "tag", reporter: Reporter.instance, name: 'x'
         expect(pt.reporter).to be_kind_of(Reporter)
       end
       
@@ -50,7 +50,8 @@ module WithEthics
 
     describe "tag search" do
       before do
-        @rep = Reporter.new output_to: []
+        @rep = Reporter.instance
+        @rep.config output_to: []
       end
       
       it "should find tag in one file" do                                   
@@ -70,6 +71,7 @@ module WithEthics
         # this is a naive report since the tag could be found
         # a hundred times in one file and not at all in another.
         @rep.family = "tags"
+        @rep.config output_to: ['console']
         pt = PromisedTag.new tag: 'security', name: '*.rb', path: "@root/spec/files", reporter: @rep
         pt.search
         expect(pt.reporter.progress["tags"].first.message).to eq("\e[0;32;49m\tFound 'security' tag 1 time(s)\e[0m")

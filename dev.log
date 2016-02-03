@@ -1,7 +1,11 @@
+2/3
+    Changing reporter to a singleton.
+    Discovery: testing with singletons is a trifle unpredictable because tests that pass when run singly fail when run in batch. Fun!
+
 2/2
     Default types worked fine, so it has now been t=hrown away. Instead we have type finder (which does not actually find anything) which accepts a regex pattern for things it does not recognize.
-    Now promised_file needs to be superceded as well, by something that knows the difference between default types, custom types, and explicitly named files.
     Looks like I have broken the Reporter "progress" method by sending it in to all sorts of other objects. Bad planning, that. Pass by reference would be nice about now ...
+    NEXT: Fix reporter problems
     
 2/1
     Time to build a new approach to finding files. one that allows different locations and different naming conventions. How to work that out? It needs to have some hard-coded stuff as well as the ability to make custom definitions. Really need are a set of regexes for each type. That's a start.

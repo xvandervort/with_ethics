@@ -13,7 +13,7 @@ module WithEthics
       @tag = args[:tag] || raise(ArgumentError)
       
       @recursive_search = args[:recurse] || false # NOT YET IMPLEMENTED
-      @reporter = args[:reporter] || Reporter.new
+      @reporter = args[:reporter] || Reporter.instance
       
       # TODO: If name is not given you might be able to pull it from the path
       @name = args[:name] || raise(ArgumentError)

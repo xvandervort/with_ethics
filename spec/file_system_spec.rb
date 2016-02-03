@@ -14,7 +14,10 @@ module WithEthics
       end
       
       it "should accept reporter" do
-        expect{ @fs = FileSystem.new root: @r, reporter: Reporter.new(output_to: [])}.to_not raise_error
+        rep = Reporter.instance
+        rep.config output_to: []
+
+        expect{ @fs = FileSystem.new root: @r, reporter: rep }.to_not raise_error
         expect(@fs.reporter).to be_kind_of(Reporter)
       end
     end
@@ -22,7 +25,9 @@ module WithEthics
     describe "finding" do
       before do
         @r = Dir.pwd
-        @fs = FileSystem.new root: @r, reporter: Reporter.new(output_to: [])
+        @rep = Reporter.instance
+        @rep.config output_to: []
+        @fs = FileSystem.new root: @r, reporter: @rep
       end
       
       it "should find default type" do
@@ -44,7 +49,8 @@ module WithEthics
       end
       
       it "should report findings" do
-        fs2 = FileSystem.new root: @r, reporter: Reporter.new
+        @rep.config output_to: ['console'] # change the one thing you can
+        fs2 = FileSystem.new root: @r, reporter: @rep
         expect{ fs2.find :readme }.to output("\e[0;32;49m\tFound /home/irv/work/with_ethics/README.md\e[0m\n").to_stdout
       end
     end

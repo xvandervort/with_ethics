@@ -18,7 +18,8 @@ module WithEthics
         "checks" => ['promised_files']
         
         }
-      @reporter = Reporter.new output_to: []
+      @reporter = Reporter.instance
+      @reporter.config output_to: []
       @pr = Promises.new @config
       @cc = ChecksController.new @pr, reporter: @reporter
     end
@@ -63,7 +64,9 @@ module WithEthics
             }
           
         pr = Promises.new config
-        cc2 = ChecksController.new pr, reporter: Reporter.new(output_to: [])
+        r = Reporter.instance
+        r.config output_to: []
+        cc2 = ChecksController.new pr, reporter: r
         cc2.run_checks
         expect(cc2.checks_run.keys).to include("promised_files")
   
@@ -78,7 +81,9 @@ module WithEthics
               "type" => "ruby"
             }
         pr = Promises.new config
-        cc2 = ChecksController.new pr, reporter: Reporter.new(output_to: [])
+        r = Reporter.instance
+        r.config output_to: []
+        cc2 = ChecksController.new pr, reporter: r
         cc2.run_checks
         expect(cc2.checks_run.keys).to include("tests")      
       end

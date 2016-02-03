@@ -1,23 +1,26 @@
 require 'colorize'  # https://github.com/fazibear/colorize
+require 'singleton'
 
 module WithEthics
   class Reporter
-    attr_reader :colorized, :output_to, :current_check_family, :progress
+    include Singleton
+    attr_reader :output_to, :current_check_family, :progress
     Report = Struct.new(:message, :status)
     
-    def initialize(**args)
-      @colorized = true
-      
+    # must be called at least once.
+    def config(**args)
       # # keep a running record of checks reported, indexed by family
       # with each family keeping an array of checks
-      @current_check_family = "general"
-      @progress = {
+      @current_check_family ||= "general"
+      @progress ||= {
          @current_check_family => []
       }
       
       # it's possible to suppress all output
-      @output_to = if args.has_key?(:output_to) 
+      # This can be changed by calling config again
+      @output_to = if args.has_key?(:output_to)
         args[:output_to].include?('none') ? [] : args[:output_to]
+        
       else
         ['console']
       end

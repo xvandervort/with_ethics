@@ -8,7 +8,7 @@ module WithEthics
   class FileSystem
     attr_reader :root, :reporter
     
-    def initialize(root:, reporter: Reporter.new)
+    def initialize(root:, reporter: Reporter.instance)
       @root = root
       @reporter = reporter
     end
