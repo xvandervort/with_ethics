@@ -14,8 +14,10 @@ module WithEthics
   
   def execute!(parms)
     @config = YamlReader.new( parms[:config_file] ).data
-    @pr = Promises.new @config
-    controller = ChecksController.new @pr
+    @reporter = Reporter.instance
+    @reporter.config # currently accepts default console output
+    @pr = Promises.new @config 
+    controller = ChecksController.new @pr, reporter: @reporter
     controller.run_checks
   end
 end
