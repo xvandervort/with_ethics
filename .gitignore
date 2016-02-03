@@ -9,3 +9,6 @@
 /tmp/
 /promises.yml
 /*.gem
+*.bsh
+/with_ethics.komodoproject
+

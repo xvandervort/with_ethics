@@ -1,8 +1,0 @@
-#!/bin/bash
-export http_proxy=http://www.wb.xerox.com:8000
-export HTTP_PROXY=http://www.wb.xerox.com:8000
-export PATH=$PATH:/usr/local/bin
-
-source /home/irv/.rvm/scripts/rvm
-rvm use 2.2.2
-bundle
