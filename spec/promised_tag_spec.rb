@@ -71,10 +71,19 @@ module WithEthics
         # this is a naive report since the tag could be found
         # a hundred times in one file and not at all in another.
         @rep.family = "tags"
-        @rep.config output_to: ['console']
+        @rep.config output_to: []
         pt = PromisedTag.new tag: 'security', name: '*.rb', path: "@root/spec/files", reporter: @rep
         pt.search
         expect(pt.reporter.progress["tags"].first.message).to eq("\e[0;32;49m\tFound 'security' tag 1 time(s)\e[0m")
+      end
+      
+      it "should report failing to find tags" do
+        @rep.family = "tags"
+        @rep.config output_to: []
+        tag = 'Hortensia'
+        pt = PromisedTag.new tag: tag, name: '*.rb', path: "@root/spec/files", reporter: @rep
+        pt.search
+        expect(pt.reporter.progress["tags"].last.message).to eq("\e[0;31;49m\tWhere are the #{ tag } tags?\e[0m")
       end
     end
   end

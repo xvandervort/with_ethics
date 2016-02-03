@@ -1,6 +1,9 @@
 2/3
     Changing reporter to a singleton.
     Discovery: testing with singletons is a trifle unpredictable because tests that pass when run singly fail when run in batch. Fun!
+    QUESTION: Should file system also be a singleton?
+    Next: Make better output messages (almost done)
+    NOTE: Downloaded and tried out rubycritic gem. One possibility for a future test is requiring a certain score from rubycritic (or equivalent for a given language)(Overall score for this project was ~ 95% which I think is good)
 
 2/2
     Default types worked fine, so it has now been t=hrown away. Instead we have type finder (which does not actually find anything) which accepts a regex pattern for things it does not recognize.

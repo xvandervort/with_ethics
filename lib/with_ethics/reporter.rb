@@ -40,21 +40,17 @@ module WithEthics
     # TODO: Change output wording depending on test family.
     def report(target, status)      
       out_string = if status == true
-        "\tFound #{ target }".colorize(:green)
+        "\tFound #{ target }"
         
       else
-        "\tWhere is #{ target }?".colorize(:red)
+        "\tWhere is #{ target }?"
       end
       
-      output_to_path(out_string)
-      store(out_string, status)
+      report_message(out_string, status)
     end
     
-    # TODO: REFACTOR
     def report_problem(message) # assumed to be false
-      out_string = "\t\tFound a problem with #{ message }!".colorize(:red)
-      output_to_path(out_string)
-      store(out_string, false)
+      report_message("\t\tFound a problem with #{ message }!", false)
     end
     
     # actually handles the output of generated strings
@@ -62,6 +58,14 @@ module WithEthics
       if @output_to.include?('console')
         puts str
       end
+    end
+    
+    # no interpolation except color. Passes message right through
+    def report_message(message, state)
+      color = state == true ? :green : :red
+      str = message.colorize(color)
+      output_to_path(str)
+      store(str, state)
     end
     
     # saves the check for later summary

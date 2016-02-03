@@ -57,5 +57,10 @@ module WithEthics
       
       expect{ @r.report_problem("some file")}.to output("\e[0;31;49m\t\tFound a problem with some file!\e[0m\n").to_stdout
     end
+    
+    it "should pass through reported messages" do
+      @r.config
+      expect{ @r.report_message("Nevermore!", true)}.to output("\e[0;32;49mNevermore!\e[0m\n").to_stdout
+    end
   end
 end

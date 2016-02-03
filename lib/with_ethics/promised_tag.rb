@@ -43,7 +43,14 @@ module WithEthics
         end
       end
       
-      @reporter.report "'#{ @tag }' tag #{ @found } time(s)", (@found > 0)
+      if found > 0
+        @reporter.report "'#{ @tag }' tag #{ @found } time(s)", true
+      else
+      
+        @reporter.report_message "\tWhere are the #{ @tag } tags?", false
+      end
+      
+      
     end
   end
 end

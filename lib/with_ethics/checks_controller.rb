@@ -10,14 +10,13 @@ module WithEthics
     attr_reader :checks_run, :reporter, :root
     
     # In: a promises object and a reporter
-    # If no reporter given, then output straight to console is an adequate default.
-    def initialize(pr, reporter: Reporter.instance, root: Dir.pwd)
+    # Reporter is required in order to preserve config
+    def initialize(pr, reporter:, root: Dir.pwd)
       # The checks controller will run those things in the config
       # under checks.
       @promised = pr.config
       @checks_run = {}
       @reporter = reporter
-      @reporter.config
       @root = root
     end
     

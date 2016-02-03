@@ -35,7 +35,7 @@ module WithEthics
     
     def report(out, t)
       if out.empty?
-        @reporter.report_problem "file type #{ t }"
+        @reporter.report_message "\tWhere is there any file that could be a #{ t }?", false
         
       else
         out.each do |found|

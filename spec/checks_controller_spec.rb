@@ -32,7 +32,7 @@ module WithEthics
       
       # The controller needs to be configured with command line info
       # so best to pass it in after creation rather than try to initialize it internally
-      it "should accept a controller on init" do
+      it "should accept a reporter on init" do
         expect(@cc.reporter).to be_kind_of(Reporter)
       end
 
@@ -48,6 +48,7 @@ module WithEthics
       # WARNING: This test will be brittle until we include some mocking
       # or a feature to suppress output
       it "runs checks" do
+        @reporter.config output_to: []
         @cc.run_checks
         
         # note that the following checks were added because they are defaults
@@ -64,9 +65,9 @@ module WithEthics
             }
           
         pr = Promises.new config
-        r = Reporter.instance
-        r.config output_to: []
-        cc2 = ChecksController.new pr, reporter: r
+        @reporter.config output_to: []
+        cc2 = ChecksController.new pr, reporter: @reporter
+        
         cc2.run_checks
         expect(cc2.checks_run.keys).to include("promised_files")
   
