@@ -16,8 +16,9 @@ module WithEthics
     @config = YamlReader.new( parms[:config_file] ).data
     @reporter = Reporter.instance
     @reporter.config # currently accepts default console output
-    @pr = Promises.new @config 
-    controller = ChecksController.new @pr, reporter: @reporter
+    @pr = Promises.new @config
+    @root = parms.has_key?(:root) ? parms[:root] : Dir.pwd
+    controller = ChecksController.new @pr, reporter: @reporter, root: @root
     controller.run_checks
   end
 end

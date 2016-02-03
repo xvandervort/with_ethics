@@ -14,6 +14,10 @@ option_parser = OptionParser.new do |opts|
   opts.on('-f', '--file <path/to/config/file>', String, "specify config to use. Default = ./promises.yml") do |f|
     params[:config_file] = f
   end
+  
+  opts.on('-r', '--root <path to project root>', String, 'Specify file system root. Default is current') do |root|
+    params[:root] = root
+  end
 end
 
 option_parser.parse!
