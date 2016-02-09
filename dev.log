@@ -1,10 +1,13 @@
+2/9
+    How to tell if a job is under git. you should check to see if anything has been checked in.
+
 2/3
     Changing reporter to a singleton.
     Discovery: testing with singletons is a trifle unpredictable because tests that pass when run singly fail when run in batch. Fun!
     QUESTION: Should file system also be a singleton?
     Next: Make better output messages (done)
     NOTE: Downloaded and tried out rubycritic gem. One possibility for a future test is requiring a certain score from rubycritic (or equivalent for a given language)(Overall score for this project was ~ 95% which I think is good)
-    NEXT: specify root on the command line or as a global default
+    NEXT: specify root on the command line (done) or as a global default (done)
     THEN: look for version control.
             Once that is done, bump the version number and release!
 

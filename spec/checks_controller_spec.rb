@@ -101,4 +101,20 @@ module WithEthics
       end
     end
   end
+  
+  describe "globals" do
+    it "should set root from promises object"  do
+      config = {
+        "globals" => {
+          "root" => "/home/username/code/my_project"
+        }
+      }
+      
+      reporter = Reporter.instance
+      reporter.config output_to: []
+      pr = Promises.new config
+      cc = ChecksController.new pr, reporter: reporter
+      expect(cc.root).to eq(config["globals"]["root"])
+    end
+  end
 end

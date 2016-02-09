@@ -7,8 +7,7 @@ module WithEthics
       @config = {
         "promised_files" => {
           "code_of_conduct" => {
-            "filename" => "CODE_OF_CONDUCT.md",
-            "path" => "root"
+            "filename" => "CODE_OF_CONDUCT.md"
           },
         
           "privacy_policy" => {
@@ -17,13 +16,11 @@ module WithEthics
           },
               
           "deployment_script" => {
-              "filename" => "deploy.rb",
-              "path"  => "root"
+              "filename" => "deploy.rb"
           },
           
           "readme" => {
-            "filename" => "README.md",
-            "path" => "root"
+            "filename" => "README.md"
           }
         },
         
@@ -91,6 +88,19 @@ module WithEthics
       expect(l.size).to eq(@config["promised_files"].keys.size)
       
       # LOOKS like config format is verkakt
+    end
+  end
+  
+  describe "global settings config" do
+    it "should set root from config file" do
+      config = {
+        "globals" => {
+          "root" => "/home/username/code/my_project"
+        }
+      }
+      
+      pr = Promises.new config
+      expect(pr.config["globals"]["root"]).to eq(config["globals"]["root"])
     end
   end
 end

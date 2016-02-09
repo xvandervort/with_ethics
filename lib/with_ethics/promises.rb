@@ -4,6 +4,8 @@ module WithEthics
   # and the tests needed to check on them
   # NOTE: Because the original config comes in from a yaml file
   #       Keep all keys as strings. No symbols.
+  # This will feed into the global config and now (2/9/2016) include
+  # global features as well as specific promises.
   class Promises
     attr_reader :config
     

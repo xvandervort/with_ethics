@@ -11,13 +11,13 @@ module WithEthics
     
     # In: a promises object and a reporter
     # Reporter is required in order to preserve config
-    def initialize(pr, reporter:, root: Dir.pwd)
+    def initialize(pr, reporter:, root: nil)
       # The checks controller will run those things in the config
       # under checks.
       @promised = pr.config
       @checks_run = {}
       @reporter = reporter
-      @root = root
+      @root = find_root(root)
     end
     
     def run_checks
@@ -100,6 +100,15 @@ module WithEthics
       # Are there TODOs in the code?
       # Are there a lot of # FIX 's in the code?
       false
+    end
+        
+    private
+    
+    # searches through given info for root
+    # or just makes it up
+    def find_root(r)
+      r || (@promised.has_key?("globals") && @promised["globals"].has_key?("root") ?
+            @promised["globals"]["root"] : Dir.pwd)
     end
   end
 end
