@@ -33,6 +33,10 @@ module WithEthics
         
         "tests" => {
           "type" => "ruby"
+        },
+        
+        "version_control" => {
+          "type" => "git"
         }
       }
     end
@@ -88,6 +92,11 @@ module WithEthics
       expect(l.size).to eq(@config["promised_files"].keys.size)
       
       # LOOKS like config format is verkakt
+    end
+    
+    it "should know given type of version control" do
+      pr = Promises.new @config
+      expect(pr.config["version_control"]["type"]).to eq("git")
     end
   end
   

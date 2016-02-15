@@ -58,6 +58,6 @@ module WithEthics
     end
     
     it "should check file is under version control"
-    it "should search below given path for missing file"
+    it "should check file is current in repository"
   end
 end

@@ -9,6 +9,7 @@ require_relative 'with_ethics/file_info'
 require_relative 'with_ethics/tfind'
 require_relative 'with_ethics/type_finder'
 require_relative 'with_ethics/file_system'
+require_relative 'with_ethics/repo'
 
 module WithEthics
   

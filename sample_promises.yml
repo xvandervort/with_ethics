@@ -1,30 +1,45 @@
-promised_files: 
+defaults:
+  root: /home/irv/work/medical_adherence
+  
+  # when the language is specified, file endings should be known automatically
+  # to be implemented
+  language: ruby
+
+# Files are important for various reasons
+promised_files:
+  # default types
   code_of_conduct:
-    filename: CODE_OF_CONDUCT.md
-    path: "@root"
       
   privacy_policy:
-    filename: privacy.doc
-    path: "@root/public"
-      
+
   deployment_script:
-    filename: deploy.rb
-    path: "@root"
-      
+
   readme:
-    filename: README.md
-    path: "@root"
     
+# should add a custom type with regex
+# and something with explciti name and path
+
+version_control:
+  type: git
+    
+# tags are commmented words inserted into code as notes for later programmers
+# like this one:
+# TODO: rewrite that explanation better.
 promised_tags:
   # NOTE that a security tag can go in a test file or a code file.
   # it means something different in each location
   security:
     filename: "*.rb"
-    path: "@root/spec/files"
-    recurse: true
         
   todo:
     filename: "*.rb"
-    path: "@root/lib/with_ethics"
-    recurse: false 
+    recurse: false
     
+    
+# currently only looks for a test directory with files in it.
+# Eventually hope to have it distinguish between unit, integration and acceptance tests
+# and even download some tools to check coverage.
+tests:
+    type: ruby  # currently the default is the only kind there is
+   
+ 

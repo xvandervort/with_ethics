@@ -88,8 +88,16 @@ module WithEthics
     
     def version_control
       # Is the code checked in to github or subversion or mercurial? (screw any others)
+      if @promised.has_key?("version_control")
+        @repo = Repo.new  type: @promised["version_control"]["type"],
+                          reporter: @reporter, root: @root
+        @repo.find
+        
+        true
+      else
       
-      true
+        false
+      end
     end
     
     # untested

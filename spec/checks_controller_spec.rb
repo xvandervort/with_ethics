@@ -13,8 +13,7 @@ module WithEthics
           },
           
           "readme" => nil
-        },
-          
+        }, 
         "checks" => ['promised_files']
         
         }
@@ -91,6 +90,20 @@ module WithEthics
       
       it "actually runs file checks" do
         expect(@cc.promised_files).to be(true)
+      end
+      
+      it "actually runs vc checks" do
+        path = "#{ Dir.pwd }/.git"
+        allow(File).to receive(:exists?).with(path).and_return(true)
+        config = @config.merge "version_control" => {
+              "type" => "git"
+            }
+        pr = Promises.new config
+        r = Reporter.instance
+        r.config output_to: []
+        cc2 = ChecksController.new pr, reporter: r
+        cc2.run_checks
+        expect(cc2.checks_run.keys).to include("version_control")
       end
       
       it "should report one check" do

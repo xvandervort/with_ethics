@@ -11,4 +11,5 @@
 /*.gem
 *.bsh
 /with_ethics.komodoproject
+Guardfile
 
