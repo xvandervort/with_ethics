@@ -47,7 +47,6 @@ module WithEthics
     
     it "should report finding git repo" do
       expect { @repo.find }.to output("\e[0;32;49m\tFound git repository\e[0m\n").to_stdout
-      
     end
   end
   
@@ -71,5 +70,47 @@ module WithEthics
       allow(File).to receive(:directory?).with(path).and_return(true)
       expect(@repo.find).to eq(true)
     end
+    
+    # SVN keeps a .svn directory in every directory throughout the repo
+    # so just seeing it at the top level isn't good enough. You have to check
+    # all the way down.
+    it "confirms svn repo recursively"
   end
+  
+  describe "mercurial" do
+    before do
+      @reporter = Reporter.instance
+      @reporter.config output_to: []
+      @repo = Repo.new type: 'hg', reporter: @reporter
+    end
+    
+    it "should find when present" do
+      # I know it's sort of a tautology but
+      # how'm I going to test a subversion repository
+      # from a git based project?
+      path = "#{ Dir.pwd }/.hg"
+      allow(File).to receive(:exists?).with(path).and_return(true)
+      allow(File).to receive(:directory?).with(path).and_return(true)
+      expect(@repo.find).to eq(true)
+    end
+  end
+  
+    
+  describe "unknown version control" do
+    
+    it "should find known type without spec" do
+      %w(hg svn git).each do |t|
+        path = "#{ Dir.pwd }/.#{ t }"
+        val = (t == 'svn')
+        allow(File).to receive(:exists?).with(path).and_return(val)
+        allow(File).to receive(:directory?).with(path).and_return(val)
+        
+      end
+      @reporter = Reporter.instance
+      @reporter.config
+      @repo = Repo.new type: nil, reporter: @reporter
+      expect { @repo.find }.to output("\e[0;32;49m\tFound svn repository\e[0m\n").to_stdout
+    end
+  end
+
 end

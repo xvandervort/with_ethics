@@ -1,6 +1,17 @@
+2/17
+    Working on finding unknown version control.
+    THEN: Do deeper inspection of each version control.
+        Time since last commit
+        Untracked files/folders
+        Uncommitted changes
+        Remotes and their status too
+        
+    What other kinds of vc should be supported? visual source safe? Bitkeeper.  Bazaar (bzr)!! (This one should be an easy add bazaar.canonical.com/en). Hmmm, bzr can be used in distributed or centralized modes. That may make it tricky to work with.
+
 2/15
     Looks like time to need to wire up finding the repository.
-    Next: Add mercurial repos and start investigating evaluation of commits
+    NEXT: Add mercurial repos (DONE)
+    THEN: look for unknown type of repo
     
 2/9
     How to tell if a job is under git? should check to see if anything has been checked in, too.
