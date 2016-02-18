@@ -14,11 +14,16 @@ require_relative 'with_ethics/repo'
 module WithEthics
   
   def execute!(parms)
-    @config = YamlReader.new( parms[:config_file] ).data
     @reporter = Reporter.instance
-    @reporter.config # currently accepts default console output
+    @config = YamlReader.new( parms[:config_file] ).data
+    
+    # set arguments for reporter, if any
+    args = parms[:output_to].nil? ? {} : { output_to: parms[:output_to] }
+    @reporter.config args
+    
     @pr = Promises.new @config
     @root = parms.has_key?(:root) ? parms[:root] : Dir.pwd
+    
     controller = ChecksController.new @pr, reporter: @reporter, root: @root
     controller.run_checks
   end

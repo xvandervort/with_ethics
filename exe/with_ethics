@@ -18,10 +18,14 @@ option_parser = OptionParser.new do |opts|
   opts.on('-r', '--root <path to project root>', String, 'Specify file system root. Default is current') do |root|
     params[:root] = root
   end
+  
+  opts.on('-s', '--silent', "Suppresses all output. Mostly used for testing") do
+    params[:output_to] = []
+  end
 end
 
 option_parser.parse!
 
-params[:skip] ||= false
-params[:config_file] ||= "promises.yml"
+params[:config_file] ||= params[:root].nil? ? "promises.yml" : "#{ params[:root] }/promises.yml"
+
 execute!(params)
