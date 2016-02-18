@@ -24,7 +24,7 @@ module WithEthics
     
     # code of conduct
     def coc
-      ['code_*of_*conduct', 'coc']
+      ['code_of_conduct', 'coc']
     end
     alias :code_of_conduct :coc
     
