@@ -1,3 +1,14 @@
+3/30
+    What? More than a month away? What should be done next? What state is this thing in? Looks like duration is usable, meaning it's time to do some deeper version control checking on the git repo.
+
+2/20
+    Continuing with the duration class so that time of last commit can give reasonable feedback.
+
+2/19
+    Cucumber was a success. Now enabling deeper checks of svn. THEN: need a switch for depth checking. Or maybe an option in the yaml file. Or both!
+    Weird deviation: The hardest part about checking when the last commit was and how old the project is and whatnot, is expressing the results in the text report. Solution: (?) creating a class to deal with that. Duration.
+        BUG (SORT OF): Guard is acting weird. Sometimes running specs twice or something.
+
 2/18
     Taking a time out to set up cucumber so the command line switches are properly tested and documented.
 
