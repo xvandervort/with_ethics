@@ -37,4 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "aruba"
   spec.add_dependency "colorize"
   spec.add_dependency "activesupport"
+  # http://github.com/schacon/ruby-git
+  spec.add_dependency "git"
 end

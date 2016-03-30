@@ -11,6 +11,7 @@ require_relative 'with_ethics/type_finder'
 require_relative 'with_ethics/file_system'
 require_relative 'with_ethics/repo'
 require_relative 'with_ethics/support/duration'
+require_relative 'with_ethics/support/gitvc'
 
 module WithEthics
   
