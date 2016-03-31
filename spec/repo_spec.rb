@@ -54,7 +54,7 @@ module WithEthics
       gstat = double(Git::Status, changed: {}, added: {})
       git = double(Git::Base, status_hint: 'good', results: { summary: "Repository is in good condition." }, log: {}, status: gstat)
       allow(Git).to receive(:open).and_return(git)
-      expect { @repo.status }.to output("\e[0;31;49m\tRepository is in poor condition.\e[0m\n").to_stdout
+      expect { @repo.status }.to output("\e[0;32;49m\tRepository is in good condition.\e[0m\n").to_stdout
     end
   end
   

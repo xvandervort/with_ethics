@@ -8,6 +8,7 @@
     Yup. Need to completely rework reporting to DECOUPLE it form all the other stuff that's going on as well as to allow more colors than red and green. Yellow, for example.
     BUG: It is not noticing the TODO tags scattered all over the place.
     Also: Couldn't get the cucumber scenario for the new output to work. It refuses to run the with-ethics command
+    BUG: It tells me the repo is in poor condition when there are no untracked files and no uncommitted changes!
 
 3/30
     What? More than a month away? What should be done next? What state is this thing in? Looks like duration is usable, meaning it's time to do some deeper version control checking on the git repo. Using the git gem, it loks like the first entry in g.log is the most recent commit.

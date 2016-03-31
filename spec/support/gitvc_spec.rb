@@ -71,7 +71,10 @@ module WithEthics
         rec = double(Git::Object::Commit, date: d)
         glog = double(Git::Log, first: rec)
         allow(@git).to receive(:log).and_return(glog)
-        gstat = double(Git::Status, changed: { "somefile" => 'dummy' }, added: { "someotherfile" => 'dummy' })
+      end
+      
+      def secondary_setup(chg = { "somefile" => 'dummy' }, add = { "someotherfile" => 'dummy' })
+        gstat = double(Git::Status, changed: chg, added: add)
         allow(@git).to receive(:status).and_return(gstat)
         @g.log_info
         @g.status_info
@@ -80,6 +83,7 @@ module WithEthics
       # rather than feed the damned report object into this thing
       # have it spit out a report. Simple report = 1 line.
       it "should give simple report" do
+        secondary_setup
         # There will be 3 levels of output. Simplest - one line only, medium, more detailed, and verbose.
         simple_output = @g.results
         expect(simple_output).to be_kind_of Hash
@@ -89,6 +93,7 @@ module WithEthics
       
       # more verbose output
       it "should give detailed summary" do
+        secondary_setup
         dout = @g.results(verbose: true)
         expect(dout).to have_key(:age)
         expect(dout).to have_key(:changes)
@@ -96,6 +101,7 @@ module WithEthics
       end
       
       it "should store summary hint" do
+        secondary_setup
         @g.results
         expect(@g.status_hint).to eq("poor")
       end
@@ -103,8 +109,15 @@ module WithEthics
       # This is a shim, to be able to work with reporter
       # until it can be updated to include yellow text
       it "should give a boolean instead of summary hint" do
+        secondary_setup
         @g.results
         expect(@g.boolean_status).to eq(false)
+      end
+      
+      it "should correctly report good status" do
+        secondary_setup({}, {})
+        @g.results
+        expect(@g.boolean_status).to eq(true)
       end
     end
   end

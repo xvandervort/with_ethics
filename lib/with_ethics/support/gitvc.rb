@@ -80,10 +80,10 @@ module WithEthics
     
     # TODO: Take time since last commit into account?
     def status_summary
-      if @changed.size == 0 && @untracked.size == 0
+      if @changed == 0 && @untracked == 0
         "good"
         
-      elsif @changed.size > 0 && @untracked.size == 0
+      elsif @changed > 0 && @untracked == 0
         "questionable"
         
       else
