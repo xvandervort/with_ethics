@@ -1,4 +1,5 @@
 require 'active_support/core_ext/string'
+require_relative 'support/gitvc'
 
 module WithEthics
   # finds a repository of a known type
@@ -29,6 +30,21 @@ module WithEthics
       # now react to whether nothing was found
       @reporter.report_message("\tNo version control found.", false) unless found
       found
+    end
+    
+    # figures out just what kind of condition the repo is in
+    # although so far it doesn't go very deep.
+    def status
+      # instantiate an interrogator for the repo type.
+      find if @type.nil?
+      
+      # TODO: allow other types
+      @repo = Gitvc.new @root
+      @repo.log_info
+      @repo.status_info
+      
+      # TODO: allow verbose output
+      @reporter.report_message("\t#{ @repo.results[:summary] }", @repo.boolean_status)
     end
     
     private

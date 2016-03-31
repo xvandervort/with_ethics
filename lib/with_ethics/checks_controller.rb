@@ -93,6 +93,10 @@ module WithEthics
                           reporter: @reporter, root: @root
         @repo.find
         
+        if @promised["version_control"].has_key?("level") && @promised["version_control"]["level"] != "minimal"
+          @repo.status
+        end
+        
         true
       else
       

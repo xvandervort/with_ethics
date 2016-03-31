@@ -94,6 +94,18 @@ module WithEthics
         expect(dout).to have_key(:changes)
         expect(dout).to have_key(:missing)
       end
+      
+      it "should store summary hint" do
+        @g.results
+        expect(@g.status_hint).to eq("poor")
+      end
+      
+      # This is a shim, to be able to work with reporter
+      # until it can be updated to include yellow text
+      it "should give a boolean instead of summary hint" do
+        @g.results
+        expect(@g.boolean_status).to eq(false)
+      end
     end
   end
 end

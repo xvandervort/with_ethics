@@ -4,7 +4,7 @@ module WithEthics
   # gather data about git repository
   # Using read-only methods!
   class Gitvc
-    attr_reader :path, :git, :status, :last_commit, :changed, :untracked
+    attr_reader :path, :git, :status, :last_commit, :changed, :untracked, :status_hint
     
     def initialize(source_path)
       @path = source_path
@@ -56,8 +56,15 @@ module WithEthics
       
     end
     
+    # returns simple true if status hint is good, false otherwise
+    def boolean_status
+      !!(@status_hint == 'good')
+    end
+    
+    
     def results(**args)
-      out = { summary: "Repository is in #{ status_summary } condition." }
+      @status_hint = status_summary
+      out = { summary: "Repository is in #{ @status_hint } condition." }
       if args.has_key?(:verbose) && args[:verbose] == true
         d = Duration.new
         # add in the age and state of files

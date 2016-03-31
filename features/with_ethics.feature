@@ -29,4 +29,4 @@ Scenario: Finding promises at root
         globals:
           language: ruby
     """
-    Then I successfully run `exe/with_ethics --root features -s` 
+    Then I successfully run `exe/with_ethics --root features -s`

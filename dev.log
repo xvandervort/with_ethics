@@ -1,5 +1,13 @@
 3/31
     Reporting ...
+    What are the summary conditions of a repository?
+    uncommitted changes but no untracked files should be an UNSTABLE condition or out of sync condition.
+    
+    repository is in good/bad  /unstable/decrepit state
+        decrepit = uncomiitted changes, untracked files and a long time since last commit
+    Yup. Need to completely rework reporting to DECOUPLE it form all the other stuff that's going on as well as to allow more colors than red and green. Yellow, for example.
+    BUG: It is not noticing the TODO tags scattered all over the place.
+    Also: Couldn't get the cucumber scenario for the new output to work. It refuses to run the with-ethics command
 
 3/30
     What? More than a month away? What should be done next? What state is this thing in? Looks like duration is usable, meaning it's time to do some deeper version control checking on the git repo. Using the git gem, it loks like the first entry in g.log is the most recent commit.
