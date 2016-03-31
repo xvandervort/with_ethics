@@ -55,5 +55,34 @@ module WithEthics
       end
       
     end
+    
+    def results(**args)
+      out = { summary: "Repository is in #{ status_summary } condition." }
+      if args.has_key?(:verbose) && args[:verbose] == true
+        d = Duration.new
+        # add in the age and state of files
+        out[:age] = "It has been #{ d.since(@last_commit) } since the last commit." unless @last_commit.nil?
+        out[:changes] = "There are uncommited changes." unless @changed == 0
+        out[:missing] = "There are untracked files." unless @untracked == 0
+      end
+      
+      out
+    end
+    
+    private
+    
+    # TODO: Take time since last commit into account?
+    def status_summary
+      if @changed.size == 0 && @untracked.size == 0
+        "good"
+        
+      elsif @changed.size > 0 && @untracked.size == 0
+        "questionable"
+        
+      else
+        # both untracked and changed files in the repo
+        "poor"
+      end
+    end
   end
 end

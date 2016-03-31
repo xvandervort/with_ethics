@@ -1,7 +1,11 @@
+3/31
+    Reporting ...
+
 3/30
     What? More than a month away? What should be done next? What state is this thing in? Looks like duration is usable, meaning it's time to do some deeper version control checking on the git repo. Using the git gem, it loks like the first entry in g.log is the most recent commit.
     Most of the direct git repo examination stuff is done (for now)
     NEXT: reporting!
+    THEN: deep checks on promised files and tie it all to command line params.
 
 2/20
     Continuing with the duration class so that time of last commit can give reasonable feedback.

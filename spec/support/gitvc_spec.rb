@@ -66,10 +66,34 @@ module WithEthics
     end
     
     describe "reporting" do
+      before do
+        d = Time.now - 37.hours 
+        rec = double(Git::Object::Commit, date: d)
+        glog = double(Git::Log, first: rec)
+        allow(@git).to receive(:log).and_return(glog)
+        gstat = double(Git::Status, changed: { "somefile" => 'dummy' }, added: { "someotherfile" => 'dummy' })
+        allow(@git).to receive(:status).and_return(gstat)
+        @g.log_info
+        @g.status_info
+      end
+      
       # rather than feed the damned report object into this thing
-      # have it spit out a report. Simple report = 1 line. Verbose report goes into a little more depth
+      # have it spit out a report. Simple report = 1 line.
+      it "should give simple report" do
+        # There will be 3 levels of output. Simplest - one line only, medium, more detailed, and verbose.
+        simple_output = @g.results
+        expect(simple_output).to be_kind_of Hash
+        expect(simple_output).to have_key(:summary)
+        expect(simple_output[:summary]).to_not be_nil
+      end
       
-      
+      # more verbose output
+      it "should give detailed summary" do
+        dout = @g.results(verbose: true)
+        expect(dout).to have_key(:age)
+        expect(dout).to have_key(:changes)
+        expect(dout).to have_key(:missing)
+      end
     end
   end
 end

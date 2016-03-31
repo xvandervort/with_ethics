@@ -49,8 +49,6 @@ module WithEthics
     it "should report finding git repo" do
       expect { @repo.find }.to output("\e[0;32;49m\tFound git repository\e[0m\n").to_stdout
     end
-    
-    it "should "
   end
   
   describe "subversion" do
